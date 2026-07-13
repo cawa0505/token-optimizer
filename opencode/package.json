@@ -1,7 +1,7 @@
 {
-  "name": "token-optimizer-opencode",
-  "version": "1.0.15",
-  "description": "Context quality scoring, smart compaction, and session continuity for OpenCode. Full parity with the Claude Code Token Optimizer plugin.",
+  "name": "@jimmyyen/token-optimizer-opencode",
+  "version": "1.0.16",
+  "description": "Context quality scoring, smart compaction, and session continuity for OpenCode. Fork with cross-platform global data dir.",
   "type": "module",
   "main": "dist/plugin.js",
   "types": "dist/plugin.d.ts",
@@ -33,11 +33,11 @@
     "ai-agent",
     "context-window"
   ],
-  "author": "Alex Greenshpun",
+  "author": "Jimmy Yen",
   "license": "PolyForm-Noncommercial-1.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexgreensh/token-optimizer",
+    "url": "https://github.com/cawa0505/token-optimizer",
     "directory": "opencode"
   },
   "publishConfig": {

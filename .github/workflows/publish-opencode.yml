@@ -1,0 +1,42 @@
+name: Publish OpenCode Plugin
+
+on:
+  push:
+    tags:
+      - "opencode-v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version bump (patch | minor | major)"
+        required: true
+        default: "patch"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: opencode
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+
+      - run: bun install --frozen-lockfile
+
+      - run: bun run build
+
+      - run: bun test
+
+      - name: Set npm auth
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          npm config set @jimmyyen:registry https://registry.npmjs.org/
+
+      - name: Bump version (workflow_dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        run: npm version ${{ github.event.inputs.version }}
+
+      - name: Publish
+        run: npm publish --access public
